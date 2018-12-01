@@ -15,10 +15,29 @@ import org.jsoup.select.Elements;
 public class App 
 {
 	public static void main(String [] args) {
-		extract();
+		workingWithUrl();
 	}
 
+	public static void workingWithUrl() {
+		// Working With URL
+		Document doc = null;
+		try {
+			doc = Jsoup.connect("http://dic.daum.net").get();
+			Element link = doc.select("a").first();
+			String relHref = link.attr("href"); // =="/"
+			String absHref = link.attr("abs:href"); // "http://jsoup.org/"
+			String absHref2 = link.absUrl("href");
+			
+			System.out.println("RELATIVE HREF: " + relHref);
+			System.out.println("ABSOLUTE HREF: " + absHref);
+			System.out.println("ABSOLUTE HREF2: " + absHref2);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
 	public static void extract() {
+		// Extract attributes, text, and HTML from elements
 		String html = "<p>An <a href='http://example.com/'><b>example</b></a> link.</p>";
 		Document doc = Jsoup.parse(html);
 		Element link = doc.select("a").first();
