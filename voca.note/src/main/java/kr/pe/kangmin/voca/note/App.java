@@ -14,8 +14,24 @@ import org.jsoup.select.Elements;
  */
 public class App 
 {
-	public static void main(String [] args) {
-		workingWithUrl();
+	public static void main(String [] args) throws Exception {
+//		Document doc = getDocumentFromFile("/home/kangmin/play/Project/vocabulary_note/segregate_related.html");
+		Document doc = getDocumentFromUrl("http://dic.daum.net/search.do?q=segregate");
+//		System.out.println("DOCUMENT: " + doc);
+		Elements classes = doc.getElementsByClass("txt_cleansch");
+		System.out.println("word class: " + classes);
+		
+		Elements korWords = doc.getElementsByClass("list_search");
+		System.out.println("Korean Text" + korWords.get(0));
+	}
+	
+	public static Document getDocumentFromFile(String path) throws IOException {
+		File inputFile = new File(path);
+		return Jsoup.parse(inputFile, "UTF-8");
+	}
+	
+	public static Document getDocumentFromUrl(String url) throws IOException {
+		return Jsoup.connect(url).get();
 	}
 
 	public static void workingWithUrl() {
