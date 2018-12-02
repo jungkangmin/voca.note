@@ -16,13 +16,20 @@ public class App
 {
 	public static void main(String [] args) throws Exception {
 //		Document doc = getDocumentFromFile("/home/kangmin/play/Project/vocabulary_note/segregate_related.html");
-		Document doc = getDocumentFromUrl("http://dic.daum.net/search.do?q=segregate");
+		Document doc = getDocumentFromUrl("http://dic.daum.net/search.do?q=orthogonal");
 //		System.out.println("DOCUMENT: " + doc);
 		Elements classes = doc.getElementsByClass("txt_cleansch");
 		System.out.println("word class: " + classes);
+		Element element = null;
+		if (classes.size() > 0)
+			element = classes.get(0);
+		else
+			return;
 		
-		Elements korWords = doc.getElementsByClass("list_search");
-		System.out.println("Korean Text" + korWords.get(0));
+		System.out.println("WORD: " + element.text());
+		
+//		Elements korWords = doc.getElementsByClass("list_search");
+//		System.out.println("Korean Text" + korWords.get(0));
 	}
 	
 	public static Document getDocumentFromFile(String path) throws IOException {
