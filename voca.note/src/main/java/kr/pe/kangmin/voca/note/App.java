@@ -16,7 +16,7 @@ public class App
 {
 	public static void main(String [] args) throws Exception {
 //		Document doc = getDocumentFromFile("/home/kangmin/play/Project/vocabulary_note/segregate_related.html");
-		Document doc = getDocumentFromUrl("http://dic.daum.net/search.do?q=orthogonal");
+		Document doc = getDocumentFromUrl("http://dic.daum.net/search.do?q=segregate");
 //		System.out.println("DOCUMENT: " + doc);
 		Elements classes = doc.getElementsByClass("txt_cleansch");
 		System.out.println("word class: " + classes);
@@ -26,6 +26,16 @@ public class App
 		else
 			return;
 		
+		System.out.println("WORD: " + element.text());
+		
+		classes = doc.getElementsByClass("list_search");
+		//System.out.println("word class: " + classes);
+		if (classes.size() > 0)
+			element = classes.get(0);
+		else
+			return;
+				
+		System.out.println("WORD: " + element.getElementsByTag("daum:word").text());
 		System.out.println("WORD: " + element.text());
 		
 //		Elements korWords = doc.getElementsByClass("list_search");
